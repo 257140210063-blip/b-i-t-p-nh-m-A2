@@ -1,0 +1,43 @@
+# b-i-t-p-nh-m-A2// Chuyển chuỗi thành chữ thường phục vụ tìm kiếm
+string toLower(string str) {
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+void inTieuDe() {
+    cout << string(86, '-') << endl;
+    cout << left 
+         << setw(10) << "Ma HS"
+         << setw(22) << "Ho va Ten"
+         << setw(10) << "Lop"
+         << setw(8)  << "Toan"
+         << setw(8)  << "Van"
+         << setw(8)  << "Anh"
+         << setw(8)  << "DTB"
+         << setw(12) << "Xep Loai" << endl;
+    cout << string(86, '-') << endl;
+}
+
+void inDanhSach(const vector<HocSinh>& ds) {
+    if (ds.empty()) {
+        cout << "\n[!] Danh sach hien dang rong!\n";
+        return;
+    }
+
+    inTieuDe();
+    for (const auto& hs : ds) {
+        cout << hs << "\n";
+    }
+    cout << string(86, '-') << endl;
+}
+
+void sapXepGiamDanTheoDTB(vector<HocSinh>& ds) {
+    if (ds.empty()) {
+        cout << "\n[!] Danh sach rong, khong the sap xep!\n";
+        return;
+    }
+    sort(ds.begin(), ds.end(), [](const HocSinh& a, const HocSinh& b) {
+        return a.getDiemTB() > b.getDiemTB();
+    });
+    cout << "\n[=>] Da sap xep danh sach theo diem trung binh giam dan!\n";
+}
