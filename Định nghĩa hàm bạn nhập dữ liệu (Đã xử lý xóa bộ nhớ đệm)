@@ -1,0 +1,42 @@
+istream& operator>>(istream& is, HocSinh& hs) {
+    cout << "  Nhap ma hoc sinh : ";
+    getline(is >> ws, hs.maHS);
+    cout << "  Nhap ho va ten   : ";
+    getline(is, hs.hoTen);
+    cout << "  Nhap lop         : ";
+    getline(is, hs.lop);
+    do {
+        cout << "  Nhap diem Toan   : "; 
+        is >> hs.diemToan;
+        if (hs.diemToan < 0 || hs.diemToan > 10) 
+            cout << "    [!] Diem phai nam trong khoang 0 - 10.\n";
+    } while (hs.diemToan < 0 || hs.diemToan > 10);
+    do {
+        cout << "  Nhap diem Van    : "; 
+        is >> hs.diemVan;
+        if (hs.diemVan < 0 || hs.diemVan > 10) 
+            cout << "    [!] Diem phai nam trong khoang 0 - 10.\n";
+    } while (hs.diemVan < 0 || hs.diemVan > 10);
+
+    do {
+        cout << "  Nhap diem Anh    : "; 
+        is >> hs.diemAnh;
+        if (hs.diemAnh < 0 || hs.diemAnh > 10) 
+            cout << "    [!] Diem phai nam trong khoang 0 - 10.\n";
+    } while (hs.diemAnh < 0 || hs.diemAnh > 10);
+    // Dọn sạch bộ nhớ đệm sau khi nhập số
+    is.ignore(10000, '\n');
+    hs.capNhatKetQua();
+    return is;
+}
+// Định nghĩa hàm bạn xuất dữ liệu (Căn chỉnh chuẩn 86 vị trí)
+ostream& operator<<(ostream& os, const HocSinh& hs) {
+    os << left << setw(10) << hs.maHS
+       << setw(22) << hs.hoTen
+       << setw(10) << hs.lop
+       << setw(8)  << fixed << setprecision(1) << hs.diemToan
+       << setw(8)  << hs.diemVan
+       << setw(8)  << hs.diemAnh
+       << setw(8)  << setprecision(2) << hs.diemTB
+       << setw(12) << hs.xepLoai;
+    return os;
